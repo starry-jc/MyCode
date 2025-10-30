@@ -1,3 +1,9 @@
+# update 10/30/25
+#   so the center (the pentagon) of the star won't fill,
+#   i don't know why it does that but
+#   even chatgpt doesn't know either it's being really stupid.
+#   I'll figure it out but yeah.
+
 # importing modules
 import turtle
 
