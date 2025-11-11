@@ -1,37 +1,41 @@
 # Hachiware Drawing (from Chiikawa)!
+# importing modules
 import turtle
 import random
 
-# background
+# creating screen for background
 s = turtle.Screen()
-s.bgcolor("white")
+s.bgcolor("white")  # main bg color = white
 s.setup(400, 400)
 
 turtle.colormode(255)
 
+# setting up random rgb values for bg second color
 red = random.randint(1, 255)
 green = random.randint(1, 255)
 blue = random.randint(1, 255)
 rgb = [red, green, blue]
 
+# creating bg second color as a turtle
 bg = turtle.Turtle()
 bg.speed(0)
 bg.penup()
-bg.goto(-250, -100)
+bg.goto(-250, -100) # moving it to the ground
 
+# conditional that will always run the bg second color
 while True:
-  bg.fillcolor(rgb)
   bg.color(rgb)
   bg.pendown()
-  break
 
-bg.begin_fill()
-for _ in range(2):
-  bg.forward(500)
-  bg.right(90)
-  bg.forward(250)
-  bg.right(90)
-bg.end_fill()
+  bg.begin_fill()
+  for _ in range(2):
+    bg.forward(500)
+    bg.right(90)
+    bg.forward(250)
+    bg.right(90)
+  bg.end_fill()
+  
+  break
 
 # color variables
 outline = "#35120D"
@@ -39,11 +43,14 @@ mainColor = "white"
 secondColor = "#7CADC5"
 blush = "#E8B2B9"
 
+'''---------------------------------------------'''
+
+# creating turtles
 # head turtle
 head = turtle.Turtle()
-head.hideturtle()
-head.color(outline)
-head.speed(0)
+head.hideturtle() # hiding these (for now) so they don't mess with the drawing
+head.color(outline) # defaulting the stroke outlines to be the outline color
+head.speed(0) # full speed ahead!
 head.pensize(3)
 
 # face turtle
@@ -57,37 +64,44 @@ face.pensize(5)
 body = turtle.Turtle()
 body.hideturtle()
 body.color(outline)
-body.speed(0)
+body.speed(0) 
 body.pensize(3)
 
 '''---------------------------------------------'''
 
-# head features
-head.showturtle()
+# starting with the head
+head.showturtle() # showtime!
 
-# base head
-def draw_head(r):
+# base head function
+def draw_head(r): # r = radius for ovals
+  # creating the oval
   head.penup()
   head.goto(-75, 0)
   head.pendown()
-  head.fillcolor(mainColor)
-  head.begin_fill()
   
-  head.right(45)
-  for _ in range(2):
-    head.circle(r, 90)
-    head.circle(r / 2, 90)
-  head.end_fill()
+  head.fillcolor(mainColor)
+  
+  # random nested loop for the requirement
+  while True:
+    head.begin_fill()
+    head.right(45)
+    for _ in range(2):
+      head.circle(r, 90)
+      head.circle(r/2, 90)
+    head.end_fill()
+    
+    break
 
-# left ear
-def draw_leftEar(ear):
+# left ear function
+def draw_leftEar(ear):  # ear = left ear size
   head.penup()
   head.goto(-55, 85)
-  head.setheading(0)
   head.pendown()
-  head.fillcolor(secondColor)
-  head.begin_fill()
   
+  head.setheading(0)
+  head.fillcolor(secondColor)
+  
+  head.begin_fill()
   head.forward(15)
   head.left(110)
   
@@ -97,15 +111,16 @@ def draw_leftEar(ear):
   head.forward(ear + 5)
   head.end_fill()
 
-# right ear
-def draw_rightEar(ear):
+# right ear function
+def draw_rightEar(ear): # ear = right ear size
   head.penup()
   head.goto(45, 85)
-  head.setheading(180)
   head.pendown()
-  head.fillcolor(secondColor)
-  head.begin_fill()
   
+  head.setheading(180)
+  head.fillcolor(secondColor)
+  
+  head.begin_fill()
   head.forward(15)
   head.right(110)
   
@@ -115,42 +130,54 @@ def draw_rightEar(ear):
   head.forward(ear + 5)
   head.end_fill()
 
-# forehead features
-def draw_4head(x):
+# forehead function
+def draw_4head(fore):  # fore = forehead size factor
+  x = 0
+  y = 0
+  # left curvy half
   head.penup()
   head.goto(0, 100)
-  head.setheading(-90)
   head.pendown()
+  
+  head.setheading(-90)
   head.fillcolor(secondColor)
   
   head.begin_fill()
-  for _ in range(50):
-    head.forward(x)
+  while x < 50:
+    head.forward(fore)
     head.right(3)
+    
+    x += 1
   head.end_fill()
   
+  # tracing and filling top LEFT part of oval
   head.setheading(45)
   
   head.begin_fill()
   for _ in range(45):
-    head.forward(x)
+    head.forward(fore)
     head.right(1.35)
   head.end_fill()
   
+  # tracing and filling top RIGHT part of oval
   head.begin_fill()
-  for _ in range(30):
-    head.forward(x)
+  while y < 30:
+    head.forward(fore)
     head.right(0.95)
+    
+    y += 1
   head.end_fill()
   
+  # right curvy half
   head.setheading(225)
   
   head.begin_fill()
   for _ in range(48):
-    head.forward(x)
+    head.forward(fore)
     head.right(3)
   head.end_fill()
   
+  # filling in gaps
   head.setheading(0)
   head.forward(5)
   head.setheading(-27)
@@ -159,43 +186,48 @@ def draw_4head(x):
   head.pensize(5)
   head.forward(44)
 
-# initiating head functions
+# calling all head functions!
 draw_head(100)
 draw_leftEar(30)
 draw_rightEar(30)
 draw_4head(1.75)
 
+# done with the head!
 head.hideturtle()
 
 '''---------------------------------------------'''
 
-# face features
+# next is the face
 face.showturtle()
 
-# eyebrows
-def draw_eyebrows(x):
+# eyebrows function
+def draw_eyebrows(brow):  # brow = brow length
   face.penup()
   face.goto(-29, 60)
   face.pendown()
   
-  face.forward(x)
+  face.forward(brow)
   
   face.penup()
   face.goto(18, 60)
   face.pendown()
   
-  face.forward(x)
+  face.forward(brow)
 
 # eyes
-def draw_eyes(r):
+def draw_eyes(r): # r = eye radius
+  # drawing left eye
   face.penup()
   face.goto(-29, 35)
   face.pendown()
+  
   face.fillcolor(outline)
   
   face.begin_fill()
   face.circle(r)
   face.end_fill()
+  
+  # drawing right eye
   
   face.penup()
   face.goto(21, 35)
@@ -205,22 +237,29 @@ def draw_eyes(r):
   face.circle(r)
   face.end_fill()
 
-# eye highlights
-def draw_eyeHighlights(r):
-  face.pensize(1)
+# eye highlights function
+def draw_eyeHighlights(r):  # r = radius of top highlight
+  z = 0
+  a = 0
+  # top left highlight
   face.penup()
   face.goto(-31, 44)
   face.pendown()
   
+  face.pensize(1)
   face.color(mainColor)
   face.fillcolor(mainColor)
   
   face.begin_fill()
   face.right(45)
-  for _ in range(2):
+  while z < 2:
     face.circle(r, 90)
     face.circle(r / 2, 90)
+    
+    z += 1
   face.end_fill()
+  
+  # top right highlight
   
   face.penup()
   face.goto(23, 46)
@@ -234,15 +273,21 @@ def draw_eyeHighlights(r):
     face.circle(r / 2, 90)
   face.end_fill()
   
+  # bottom left highlight
+  
   face.penup()
   face.pensize(4)
   face.goto(-31, 39)
   face.pendown()
   face.setheading(-45)
   
-  for _ in range(5):
+  while a < 5:
     face.forward(1)
     face.left(25)
+    
+    a += 1
+  
+  # bottom right highlight
   
   face.penup()
   face.pensize(4)
@@ -254,8 +299,10 @@ def draw_eyeHighlights(r):
     face.forward(1)
     face.left(25)
 
-# blush
-def draw_blush(r):
+# blush function
+def draw_blush(r):  # r = radius for ovals
+  b = 0
+  # left base blush (light red oval)
   face.penup()
   face.goto(-60, 23)
   face.pendown()
@@ -266,11 +313,14 @@ def draw_blush(r):
   
   face.begin_fill()
   face.right(45)
-  for _ in range(2):
+  while b < 2:
     face.circle(r, 90)
     face.circle(r / 2, 90)
+    
+    b += 1
   face.end_fill()
   
+  # right base blush (light red oval)
   face.penup()
   face.goto(35, 23)
   face.pendown()
@@ -286,10 +336,12 @@ def draw_blush(r):
     face.circle(r / 2, 90)
   face.end_fill()
 
-# the lines in the blush
+# the lines in the blush function
 def draw_blushLines():
-  x1 = -58
-  y1 = 32
+  c = 0
+  # left side blush lines
+  x1 = -58  # x coordinate 1 (left)
+  y1 = 32 # y coordinate 1 (left)
   
   face.penup()
   face.goto(x1, y1)
@@ -299,16 +351,19 @@ def draw_blushLines():
   face.pensize(3)
   face.color(outline)
   
-  for _ in range(4):
-    face.forward(random.randint(3, 7))
-    x1 += 4.5
+  while c < 4:
+    face.forward(random.randint(3, 7))  # randomizing their sizes
+    x1 += 4.5 # setting up the new x coordinate
     
     face.penup()
-    face.goto(x1, y1)
+    face.goto(x1, y1) # moving the turtle to the next coordinates
     face.pendown()
+    
+    c += 1
   
-  x2 = 37
-  y2 = 32
+  # right side blush lines)
+  x2 = 37 # x coordinate 2 (right)
+  y2 = 32 # y coordinate 2 (right)
   
   face.penup()
   face.goto(x2, y2)
@@ -322,8 +377,11 @@ def draw_blushLines():
     face.goto(x2, y2)
     face.pendown()
 
-# nose and mouth
-def draw_noseMouth(a):
+# nose and mouth function
+def draw_noseMouth(nose): # nose = nose size
+  d = 0
+  e = 0
+  # drawing the nose (tiny triangle)
   face.penup()
   face.goto(-2.5, 26.5)
   face.pendown()
@@ -331,10 +389,13 @@ def draw_noseMouth(a):
   face.setheading(120)
   face.pensize(5)
   
-  for _ in range(3):
-    face.forward(a)
+  while d < 3:
+    face.forward(nose)
     face.right(120)
     
+    d += 1
+    
+  # left side of mouth
   face.setheading(-90)
   face.pensize(3)
   
@@ -342,15 +403,19 @@ def draw_noseMouth(a):
     face.forward(2)
     face.right(20)
   
+  # right side of mouth
   face.penup()
   face.goto(-2.5, 26.5)
   face.pendown()
   face.setheading(-90)
   
-  for _ in range(9):
+  while e < 9:
     face.forward(2)
     face.left(20)
+    
+    e += 1
   
+  # chin
   face.penup()
   face.goto(-5, 15)
   face.pendown()
@@ -361,23 +426,26 @@ def draw_noseMouth(a):
     face.forward(1)
     face.left(10)
 
-# initiating face functions
+# calling all face functions!
 draw_eyebrows(3)
 draw_eyes(7.5)
 draw_eyeHighlights(4)
 draw_blush(12.5)
 draw_blushLines()
 draw_noseMouth(2.5)
-  
+
+# done with the face!
 face.hideturtle()
 
 '''---------------------------------------------'''
 
-# body
+# body features
 body.showturtle()
 
-# torso
+# torso function
 def draw_torso():
+  f = 0
+  # left line torso
   body.penup()
   body.goto(-60, -10)
   body.pendown()
@@ -389,12 +457,16 @@ def draw_torso():
   body.forward(60)
   body.left(90)
   
+  # bottom line torso (it's a slight curve)
   body.setheading(-20)
   
-  for _ in range(25):
+  while f < 25:
     body.forward(4.45)
     body.left(1.6)
+    
+    f += 1
   
+  # right line torso
   body.setheading(90)
   
   body.begin_fill()
@@ -402,14 +474,16 @@ def draw_torso():
   body.left(90)
   body.end_fill()
   
+  # white top line torso
   body.color(mainColor)
   body.forward(110)
   
-# arms
-def draw_arms(a, b):
+# arms function
+def draw_arms(arm, r):  # arm = arm length; r = radius for curve
+  g = 0
   # left arm
   body.penup()
-  body.goto(-67, -7.5)
+  body.goto(-67, -7.5)  # omg 67 guys
   body.pendown()
   
   body.setheading(-90)
@@ -417,15 +491,16 @@ def draw_arms(a, b):
   body.fillcolor(mainColor)
   
   body.begin_fill()
-  body.forward(a)
+  body.forward(arm) # forward slight amount...
   
+  # then curve!
   for _ in range(5):
-    body.forward(b)
+    body.forward(r)
     body.left(30)
   
-  body.setheading(90)
+  body.setheading(90) # change direction
   
-  body.forward(a)
+  body.forward(arm) # straight again
   body.end_fill()
   
   # right arm  
@@ -436,19 +511,22 @@ def draw_arms(a, b):
   body.setheading(-90)
   
   body.begin_fill()
-  body.forward(a)
+  body.forward(arm)
   
-  for _ in range(5):
-    body.forward(b)
+  while g < 5:
+    body.forward(r)
     body.right(30)
+    
+    g += 1
   
   body.setheading(90)
   
-  body.forward(a)
+  body.forward(arm)
   body.end_fill()
 
 # legs
-def draw_legs(a, b):
+def draw_legs(leg, r):  # leg = leg length; r = radius of curve
+  h = 0
   # left leg
   body.penup()
   body.goto(-60, -70)
@@ -457,15 +535,15 @@ def draw_legs(a, b):
   body.setheading(-90)
   
   body.begin_fill()
-  body.forward(a)
+  body.forward(leg) # basically same thing as arm but shorter
   
   for _ in range(5):
-    body.forward(b)
+    body.forward(r)
     body.left(30)
   
   body.setheading(90)
   
-  body.forward(a)
+  body.forward(leg)
   body.end_fill()
   
   # right leg  
@@ -476,36 +554,90 @@ def draw_legs(a, b):
   body.setheading(-90)
   
   body.begin_fill()
-  body.forward(a)
+  body.forward(leg)
   
-  for _ in range(5):
-    body.forward(b)
+  while h < 5:
+    body.forward(r)
     body.right(30)
+    
+    h += 1
   
   body.setheading(90)
   
-  body.forward(a)
+  body.forward(leg)
   body.end_fill()
   
+  # clean up on aisle left leg (hide part of an outline)
   body.penup()
   body.goto(-55, -65)
   body.pendown()
   
   body.color(mainColor)
-  body.pensize(7)
+  body.pensize(7) # trick is to make the turtle stroke big enough
   body.setheading(-90)
   
   body.forward(20)
   
+  # clean up on aisle right leg (hide part of an outline)
   body.penup()
   body.goto(45, -65)
   body.pendown()
   
   body.forward(20)
 
-# initiating body functions
+# calling all body functions!
 draw_torso()
 draw_arms(18, 2.5)
 draw_legs(13, 2.5)
 
+# done with body!
+body.hideturtle()
+
+'''---------------------------------------------'''
+
+# misc
+
+# writer turtle
+writer = turtle.Turtle()
+writer.speed(0)
+writer.penup()
+
+# title function
+def write_title(text):
+  writer.goto(-50, 175)
+  writer.pendown()
+  writer.color(outline)
+  
+  writer.write(text, align="center", font=("Times New Roman", 12, "bold"))
+  writer.hideturtle()
+
+# author function
+def write_author(text):
+  writer.showturtle()
+  writer.penup()
+  writer.goto(-50, 150)
+  writer.pendown()
+  writer.color(secondColor)
+  
+  writer.write(text, align="center", font=("Times New Roman", 10, "italic"))
+  writer.hideturtle()
+
+# your last conditional, with love <3
+if True:
+  write_title("Hachiware Drawing (from Chiikawa)!")
+  write_author("by AJC ⸜(｡˃ ᵕ ˂ )⸝♡")
+else:
+  pass
+
 turtle.done()
+
+# REQUIREMENTS CHECK:
+  # Colors: 4 (+ 1 if you count random color bg)
+  # Bg Colors: 2 (white + random)
+  # Conditionals: 2 (while loops + if statement)
+  # Random Variables: 2 (bg color + blush lines)
+  # Distinct Data Types: enough?
+  # Nested Loops: 1 (while True: ... for _ in range(2):...)
+  # Turtle Commands: too many
+  # Use of Return Statements: sort of??
+  # Use of a list: 1 (rgb)
