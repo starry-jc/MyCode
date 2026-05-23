@@ -1,6 +1,7 @@
 // This app was made as my Proof of Learning project for AP Computer Science Principles, Spring 2026.
 //  The app is inspired by the hit-game Wordle on New York Times: https://www.nytimes.com/games/wordle/index.html
 //  and made through https://code.org. The app uses one of their databases called "Wordle". 
+
 // The actual app can be accessed here: https://studio.code.org/projects/applab/1597dcd8-cc1b-4c70-ac86-168d8c726350
 // This file just contains the code.
 
