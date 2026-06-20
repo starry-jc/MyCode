@@ -22,3 +22,5 @@ for query in queries:
                 count += 1
                 
     print(count)
+    
+    sdfsdsdsdf
