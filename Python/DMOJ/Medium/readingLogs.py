@@ -1,5 +1,7 @@
 # Problem: cspc1p4
 
+import math
+
 # Assigning variables
 
 # d - days left in break
@@ -29,20 +31,15 @@ for i in range(n):
 
 efficient_readers = []
 
-try:
-    for j in range(len(i_name)):
-        if i_class_code[j] != class_code:
-            i_name.remove(i_name[j])
-            i_wpd.remove(i_wpd[j])
-            i_class_code.remove(i_class_code[j])
-            
+for j in range(len(i_name)):
+    if i_class_code[j] != class_code:
+        pass
+    else:
         try:
-            if round(p / d) == int(i_wpd[j]):
+            if int(math.ceil(p / d)) == int(i_wpd[j]):
                 efficient_readers.append(i_name[j])
         except ZeroDivisionError:
-            continue
-except IndexError:
-    pass
+                continue
         
 
 
