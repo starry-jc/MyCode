@@ -30,24 +30,42 @@ for i in range(n):
     i_class_code.append(i_list[-1][2])
 
 efficient_readers = []
+efficient_pages = []
+most_efficient_readers = []
+wpd_min = 0
 
 for j in range(len(i_name)):
     if i_class_code[j] != class_code:
         pass
     else:
         try:
-            if int(math.ceil(p / d)) == int(i_wpd[j]):
+            if int(math.ceil(p / d)) <= int(i_wpd[j]):
                 efficient_readers.append(i_name[j])
+                efficient_pages.append(i_wpd[j])
+
         except ZeroDivisionError:
                 continue
-        
 
+for k in range(len(efficient_pages)):
+    if int(efficient_pages[k]) < wpd_min or wpd_min == 0:
+        wpd_min = int(efficient_pages[k])
 
-if len(efficient_readers) == 1:
-    print(f"The most efficient reader is {efficient_readers[0]}.")
-    print("This reader is perfectly efficient.")
-elif len(efficient_readers) == 0:
+for l in range(len(efficient_pages)):
+    if int(efficient_pages[l]) == wpd_min:
+        most_efficient_readers.append(efficient_readers[l])
+
+if len(most_efficient_readers) == 1:
+    print(f"The most efficient reader is {most_efficient_readers[0]}.")
+    if wpd_min == int(math.ceil(p / d)):
+        print("This reader is perfectly efficient.")
+    else:
+        print("None of the readers are perfectly efficient.")
+elif len(most_efficient_readers) == 0:
     print("None of the readers are perfectly efficient.")
 else:
-    print(f"The most efficient readers are {",".join(efficient_readers)}.")
-    print("These readers are perfectly efficient.")
+    print(f"The most efficient readers are {",".join(most_efficient_readers)}.")
+    if wpd_min == int(math.ceil(p / d)):
+        print("These readers are perfectly efficient.")
+    else:
+        print("None of the readers are perfectly efficient.")
+
