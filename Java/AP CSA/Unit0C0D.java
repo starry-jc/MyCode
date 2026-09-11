@@ -62,5 +62,7 @@ public class Unit0C0D {
         int two = 5;
         double dec = (double)one/two;
         System.out.println(dec);
+
+        keyboard.close();
     }
 }

@@ -20,6 +20,8 @@ public class Averages {
         // Output
         System.out.printf("Your integers were the following: %d, %d, %d\n", integer1, integer2, integer3);
         System.out.println("Your average is: " + average);
+
+        keyboard.close();
     }
 
 }

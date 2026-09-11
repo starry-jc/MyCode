@@ -14,5 +14,7 @@ public class Inches2Centimeters {
 
         //Output:
         System.out.println(inches + " inches = " + cm + " centimeters");
+
+        kb.close();
     }
 }

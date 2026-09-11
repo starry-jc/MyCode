@@ -13,5 +13,7 @@ public class Temperatures {
 
         // Output:
         System.out.printf("%.1f F = %f C\n", fahrenheit_temp, celcius_temp);
+
+        kb.close();
     }
 }

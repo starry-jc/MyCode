@@ -11,5 +11,7 @@ public class Casting {
         // Output:
         int intVal = (int)doubleVal;
         System.out.printf("%f cast to an int is %d", doubleVal, intVal);
+
+        kb.close();
     }
 }

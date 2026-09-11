@@ -16,5 +16,7 @@ public class Circles {
         System.out.println("Radius of the circle: " + radius);
         System.out.println("Circumference of the circle: " + circumference);
         System.out.println("Area of the circle: " + area);
+
+        kb.close();
     }
 }
